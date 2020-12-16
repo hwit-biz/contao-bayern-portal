@@ -19,7 +19,7 @@ The extension provides 5 different front end modules - one for each "main" entit
 * Lebenslagen (Circumstances)
 * Leistungen (Services)
 
-Each module will list all records retrieved from the API and provide detail links. Each module is also able to show the details of a record.
+Each module will list all records retrieved from the API and provide detail links. Each module is also able to show the details of a record. Some of the modules also have the ability to define a redirect page for some entity types, so that the link to the detail view of that entity can be generated accordingly.
 
 ### Templating
 
