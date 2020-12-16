@@ -1,0 +1,4 @@
+
+<li class="ansprechpartner ansprechpartner--list">
+  <a href="<?= $this->link ?>"><?= $this->anrede ?> <?= $this->vorname ?> <?= $this->nachname ?>, <?= $this->funktion ?></a>
+</li>

@@ -1,0 +1,32 @@
+
+<div class="lebenslage lebenslage--detail">
+  <h1><?= $this->bezeichnung ?></h1>
+
+  <?php if ($this->langbeschreibung): ?>
+    <div class="ce_text block lebenslage__kurzbeschreibung">
+      <?= $this->langbeschreibung ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($this->synonyme): ?>
+    <div class="lebenslage__synonyme" id="lebenslage-synonyme">
+      <h2><?= $this->trans('BayernPortal.labels.synonyms') ?></h2>
+      <ul>
+        <?php foreach ($this->synonyme as $synonym): ?>
+          <li><?= $synonym ?></li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($this->leistungen): ?>
+    <div class="lebenslage__leistungen" id="lebenslage-leistungen">
+      <h2><?= $this->trans('BayernPortal.labels.services') ?></h2>
+      <ul>
+        <?php foreach ($this->leistungen as $leistung): ?>
+          <?= $this->renderList($leistung) ?>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  <?php endif; ?>
+</div>

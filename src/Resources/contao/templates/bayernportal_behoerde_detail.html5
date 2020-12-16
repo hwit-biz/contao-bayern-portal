@@ -1,0 +1,72 @@
+
+<div class="behoerde behoerde--detail">
+  <h1><?= $this->bezeichnung ?></h1>
+
+  <?php if ($this->logo): ?>
+    <?= $this->logo ?>
+  <?php endif; ?>
+
+  <?php if ($this->behoerdenart || $this->behoerdengruppe || $this->email || $this->website): ?>
+    <ul class="behoerde__infos" id="behoerde-infos">
+      <?php if ($this->behoerdenart): ?>
+        <li class="type">
+          <span class="label"><?= $this->trans('BayernPortal.labels.administrationType') ?></span> <span class="type-description"><?= $this->behoerdenart ?></span>
+        </li>
+      <?php endif; ?>
+      <?php if ($this->behoerdengruppe): ?>
+        <li class="group">
+          <span class="label"><?= $this->trans('BayernPortal.labels.administrationGroup') ?></span> <span class="group-description"><?= $this->behoerdengruppe ?></span>
+        </li>
+      <?php endif; ?>
+      <?php if ($this->email): ?>
+        <li class="email">
+          <span class="label"><?= $this->trans('BayernPortal.labels.email') ?></span> <a href="<?= \Contao\StringUtil::encodeEmail('mailto:'.$this->email) ?>" class="email-address"><?= \Contao\StringUtil::encodeEmail($this->email) ?></a>
+        </li>
+      <?php endif; ?>
+      <?php if ($this->website): ?>
+        <li class="website">
+          <span class="label"><?= $this->trans('BayernPortal.labels.website') ?></span> <a href="<?= $this->website ?>" class="website-address"><?= $this->website ?></a>
+        </li>
+      <?php endif; ?>
+    </ul>
+  <?php endif; ?>
+
+  <?php if ($this->kurzbeschreibung): ?>
+    <div class="ce_text block behoerde__kurzbeschreibung">
+      <?= $this->kurzbeschreibung ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($this->behoerdenGebaeudeZuordnungen): ?>
+    <div class="behoerde__gebaeude" id="behoerde-gebaeude">
+      <h2><?= $this->trans('BayernPortal.labels.building') ?></h2>
+      <ul>
+        <?php foreach ($this->behoerdenGebaeudeZuordnungen as $gebaeude): ?>
+          <?= $this->renderList($gebaeude) ?>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($this->leistungen): ?>
+    <div class="behoerde__leistungen" id="behoerde-leistungen">
+      <h2><?= $this->trans('BayernPortal.labels.services') ?></h2>
+      <ul>
+        <?php foreach ($this->leistungen as $leistung): ?>
+          <?= $this->renderList($leistung) ?>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($this->ansprechpartner): ?>
+    <div class="behoerde__ansprechpartner" id="behoerde-ansprechpartner">
+      <h2><?= $this->trans('BayernPortal.labels.contact') ?></h2>
+      <ul>
+        <?php foreach ($this->ansprechpartner as $leistung): ?>
+          <?= $this->renderList($leistung) ?>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  <?php endif; ?>
+</div>

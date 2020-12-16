@@ -1,0 +1,41 @@
+{
+    "name": "inspiredminds/contao-bayern-portal",
+    "description": "Contao extension to show data from the BayernPortal in the front end.",
+    "type": "contao-bundle",
+    "homepage": "https://github.com/inspiredminds/contao-bayern-portal",
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Fritz Michael Gschwantner",
+            "homepage": "http://www.inspiredminds.at",
+            "email": "fmg@inspiredminds.at",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/inspiredminds/contao-bayern-portal/issues",
+        "source": "https://github.com/inspiredminds/contao-bayern-portal"
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/fritzmg"
+        }
+    ],
+    "require": {
+        "php": "^7.2 || ^8.0",
+        "contao/core-bundle": "^4.9",
+        "symfony/http-client": "^4.4 || ^5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "InspiredMinds\\ContaoBayernPortal\\": "src/"
+        }
+    },
+    "extra": {
+        "contao-manager-plugin": "InspiredMinds\\ContaoBayernPortal\\ContaoManager\\Plugin"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16"
+    }
+}

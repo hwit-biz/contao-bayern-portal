@@ -1,0 +1,69 @@
+
+<div class="ansprechpartner ansprechpartner--detail">
+  <h1><?= $this->anrede ?> <?= $this->vorname ?> <?= $this->nachname ?></h1>
+
+  <?php if ($this->funktion): ?>
+    <p class="ansprechpartner__funktion"><?= $this->funktion ?></p>
+  <?php endif; ?>
+
+  <?php if ($this->stellenbezeichnung): ?>
+    <p class="ansprechpartner__stellenbezeichnung"><?= $this->stellenbezeichnung ?></p>
+  <?php endif; ?>
+
+  <?php if ($this->behoerdeBezeichnung || $this->telefonAnlage || $this->faxAnlage || $this->email || $this->website): ?>
+    <ul class="behoerde__infos" id="behoerde-infos">
+      <?php if ($this->behoerdeBezeichnung): ?>
+        <li class="behoerde">
+          <span class="label"><?= $this->trans('BayernPortal.labels.administration') ?></span> <a href="<?= $this->link($this->behoerde) ?>" class="behoerde-description"><?= $this->behoerdeBezeichnung ?></a>
+        </li>
+      <?php endif; ?>
+      <?php if ($this->gebaeudeBezeichnung): ?>
+        <li class="gebaeude">
+          <span class="label"><?= $this->trans('BayernPortal.labels.building') ?></span> <a href="<?= $this->link($this->gebaeude) ?>" class="gebaeude-description"><?= $this->gebaeudeBezeichnung ?></a>
+        </li>
+      <?php endif; ?>
+      <?php if ($this->telefonAnlage): ?>
+        <li class="tel">
+          <span class="label"><?= $this->trans('BayernPortal.labels.tel') ?></span>
+          <a class="tel-description" href="tel:+<?= $this->telefonLandvorwahl ?><?= ltrim($this->telefonOrtsvorwahl, '0') ?><?= $this->telefonAnlage ?><?= $this->telefonDurchwahl ?>">
+            <?= $this->telefonOrtsvorwahl ?> <?= $this->telefonAnlage ?>-<?= $this->telefonDurchwahl ?>
+          </a>
+        </li>
+      <?php endif; ?>
+      <?php if ($this->faxAnlage): ?>
+        <li class="fax">
+          <span class="label"><?= $this->trans('BayernPortal.labels.fax') ?></span>
+          <a class="fax-description" href="fax:+<?= $this->faxLandvorwahl ?><?= ltrim($this->faxOrtsvorwahl, '0') ?><?= $this->faxAnlage ?><?= $this->faxDurchwahl ?>">
+            <?= $this->faxOrtsvorwahl ?> <?= $this->faxAnlage ?>-<?= $this->faxDurchwahl ?>
+          </a>
+        </li>
+      <?php endif; ?>
+      <?php if ($this->email): ?>
+        <li class="email">
+          <span class="label"><?= $this->trans('BayernPortal.labels.email') ?></span> <a href="<?= \Contao\StringUtil::encodeEmail('mailto:'.$this->email) ?>" class="email-address"><?= \Contao\StringUtil::encodeEmail($this->email) ?></a>
+        </li>
+      <?php endif; ?>
+      <?php if ($this->website): ?>
+        <li class="website">
+          <span class="label"><?= $this->trans('BayernPortal.labels.website') ?></span> <a href="<?= $this->website ?>" class="website-address"><?= $this->website ?></a>
+        </li>
+      <?php endif; ?>
+    </ul>
+  <?php endif; ?>
+
+  <?php if ($this->sprechzeiten): ?>
+    <div class="ansprechpartner__hours" id="ansprechpartner-hours">
+      <h2><?= $this->trans('BayernPortal.labels.officeHours') ?></h2>
+      <?php if ($this->sprechzeiten->nachVereinbarung): ?>
+        <div class="ansprechpartner__appointments-only"><?= $this->trans('BayernPortal.msgs.appointmentsOnly') ?></div>
+      <?php endif; ?>
+      <?php if ($this->sprechzeiten->oeffnungszeit): ?>
+        <ul class="ansprechpartner__sprechzeiten">
+          <?php foreach ($this->sprechzeiten->oeffnungszeit as $oeffnungszeit): ?>
+            <?= $this->renderList($oeffnungszeit) ?>
+          <?php endforeach; ?>
+        </ul>
+      <?php endif; ?>
+    </div>
+  <?php endif; ?>
+</div>

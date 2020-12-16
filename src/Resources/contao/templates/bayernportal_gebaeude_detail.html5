@@ -1,0 +1,53 @@
+<div class="gebaeude gebaeude--detail">
+  <h1><?= $this->bezeichnung ?></h1>
+
+  <?php if ($this->logo): ?>
+    <?= $this->logo ?>
+  <?php endif; ?>
+
+  <div class="gebaeude__building-address" id="gebaeude-address">
+    <h2><?= $this->trans('BayernPortal.labels.buildingAddress') ?></h2>
+    <p>
+      <?= $this->hausanschriftStrasse ?><br>
+      <?= $this->hausanschriftPLZ ?> <?= $this->hausanschriftOrt ?>
+    </p>
+  </div>
+
+  <div class="gebaeude__postal-address" id="gebaeude-postal-address">
+    <h2><?= $this->trans('BayernPortal.labels.postalAddress') ?></h2>
+    <p>
+      <?= $this->postanschriftStrasse ?><br>
+      <?= $this->postanschriftPLZ ?> <?= $this->postanschriftOrt ?>
+    </p>
+  </div>
+
+  <div class="gebaeude__tel" id="gebaeude-tel">
+    <h2><?= $this->trans('BayernPortal.labels.tel') ?></h2>
+    <a href="tel:+<?= $this->telefonLandvorwahl ?><?= ltrim($this->telefonOrtsvorwahl, '0') ?><?= $this->telefonAnlage ?><?= $this->telefonDurchwahl ?>">
+      <?= $this->telefonOrtsvorwahl ?> <?= $this->telefonAnlage ?>-<?= $this->telefonDurchwahl ?>
+    </a>
+  </div>
+
+  <div class="gebaeude__fax" id="gebaeude-fax">
+    <h2><?= $this->trans('BayernPortal.labels.fax') ?></h2>
+    <a href="fax:+<?= $this->faxLandvorwahl ?><?= ltrim($this->faxOrtsvorwahl, '0') ?><?= $this->faxAnlage ?><?= $this->faxDurchwahl ?>">
+      <?= $this->faxOrtsvorwahl ?> <?= $this->faxAnlage ?>-<?= $this->faxDurchwahl ?>
+    </a>
+  </div>
+
+  <?php if ($this->oeffnungszeiten): ?>
+    <div class="gebaeude__hours" id="gebaeude-hours">
+      <h2><?= $this->trans('BayernPortal.labels.openingHours') ?></h2>
+      <?php if ($this->oeffnungszeiten->nachVereinbarung): ?>
+        <div class="gebaeude__appointments-only"><?= $this->trans('BayernPortal.msgs.appointmentsOnly') ?></div>
+      <?php endif; ?>
+      <?php if ($this->oeffnungszeiten->oeffnungszeit): ?>
+        <ul class="gebaeude__oeffnungszeiten">
+          <?php foreach ($this->oeffnungszeiten->oeffnungszeit as $oeffnungszeit): ?>
+            <?= $this->renderList($oeffnungszeit) ?>
+          <?php endforeach; ?>
+        </ul>
+      <?php endif; ?>
+    </div>
+  <?php endif; ?>
+</div>

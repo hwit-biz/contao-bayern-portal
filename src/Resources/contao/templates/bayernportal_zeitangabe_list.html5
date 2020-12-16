@@ -1,0 +1,10 @@
+<?php /** @var \InspiredMinds\ContaoBayernPortal\ApiEntity\ZeitangabeEntity $entity */ $entity = $this->entity ?>
+<li class="zeitangabe zeitangabe--list">
+  <span class="day"><?= $entity->typ ?></span>
+  <?php if ($entity->hasBeforeNoon()): ?>
+    <span class="before-noon"><?= $entity->getBeforeNoon() ?></span>
+  <?php endif; ?>
+  <?php if ($entity->hasAfterNoon()): ?>
+    <span class="after-noon"><?= $entity->getAfterNoon() ?></span>
+  <?php endif; ?>
+</li>

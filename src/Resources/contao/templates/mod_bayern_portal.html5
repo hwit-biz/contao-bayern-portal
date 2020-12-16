@@ -1,0 +1,15 @@
+<?php $this->extend($this->parentBlock); ?>
+
+<?php $this->block('content'); ?>
+
+  <?php if ($this->detail): ?>
+    <?= $this->renderDetail($this->detail) ?>
+  <?php elseif ($this->list): ?>
+    <ul>
+      <?php foreach ($this->list as $element): ?>
+        <?= $this->renderList($element) ?>
+      <?php endforeach; ?>
+    </ul>
+  <?php endif; ?>
+
+<?php $this->endblock(); ?>

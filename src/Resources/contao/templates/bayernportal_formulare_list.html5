@@ -1,0 +1,9 @@
+
+<li class="formulare formulare--list">
+  <span class="label"><?= $this->leistungBezeichnung ?></span>
+  <ul>
+    <?php foreach ($this->formulare as $formular): ?>
+      <?= $this->renderList($formular) ?>
+    <?php endforeach; ?>
+  </ul>
+</li>

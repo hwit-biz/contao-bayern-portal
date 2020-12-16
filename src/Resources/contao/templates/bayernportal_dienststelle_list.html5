@@ -1,0 +1,4 @@
+
+<li class="dienststelle dienststelle--list">
+  <a href="<?= $this->link ?>"><?= $this->bezeichnung ?></a>
+</li>

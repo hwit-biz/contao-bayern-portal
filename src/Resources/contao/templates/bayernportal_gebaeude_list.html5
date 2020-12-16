@@ -1,0 +1,4 @@
+
+<li class="behoerde behoerde--list">
+  <a href="<?= $this->link ?>"><?= $this->bezeichnung ?></a>
+</li>

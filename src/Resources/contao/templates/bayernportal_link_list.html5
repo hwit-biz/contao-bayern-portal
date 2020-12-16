@@ -1,0 +1,4 @@
+<?php /** @var \InspiredMinds\ContaoBayernPortal\ApiEntity\LinkEntity $entity */ $entity = $this->entity ?>
+<li class="link link--list">
+  <a href="<?= $entity->url ?>"><?= $entity->kurzbeschreibung ?></a>
+</li>

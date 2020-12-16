@@ -1,0 +1,6 @@
+
+<li class="formular formular--list">
+  <div class="kurzbeschreibung"><a href="<?= $this->url ?>"><?= $this->kurzbeschreibung ?></a></div>
+  <div class="langbeschreibung"><p><?= $this->langbeschreibung ?></p></div>
+  <div class="schriftformErfordernis"><p><?= $this->schriftformErfordernis ?></p></div>
+</li>

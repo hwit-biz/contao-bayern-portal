@@ -1,0 +1,72 @@
+
+<div class="leistung leistung--detail">
+  <h1><?= $this->bezeichnung ?></h1>
+
+  <?php if ($this->langbeschreibung): ?>
+    <div class="ce_text block leistung__langbeschreibung">
+      <?= $this->langbeschreibung ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($this->links): ?>
+    <div class="leistung__links" id="leistung-links">
+      <h2><?= $this->trans('BayernPortal.labels.links') ?></h2>
+      <ul>
+        <?php foreach ($this->links as $link): ?>
+          <?= $this->renderList($link) ?>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($this->synonyme): ?>
+    <div class="leistung__synonyme" id="leistung-synonyme">
+      <h2><?= $this->trans('BayernPortal.labels.synonyms') ?></h2>
+      <ul>
+        <?php foreach ($this->synonyme as $synonym): ?>
+          <li><?= $synonym ?></li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($this->lebenslagen): ?>
+    <div class="leistung__lebenslagen" id="leistung-lebenslagen">
+      <h2><?= $this->trans('BayernPortal.labels.circumstances') ?></h2>
+      <ul>
+        <?php foreach ($this->lebenslagen as $lebenslage): ?>
+          <?= $this->renderList($lebenslage) ?>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($this->verwandteLeistungen): ?>
+    <div class="leistung__verwandte-leistungen" id="leistung-verwandte-leistungen">
+      <h2><?= $this->trans('BayernPortal.labels.relatedServices') ?></h2>
+      <ul>
+        <?php foreach ($this->verwandteLeistungen as $leistung): ?>
+          <?= $this->renderList($leistung) ?>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($this->verantwortlicheBehoerde): ?>
+    <div class="leistung__verantwortliche-behoerde" id="leistung-verwantwortliche-behoerde">
+      <h2><?= $this->trans('BayernPortal.labels.responsibleAdministration') ?></h2>
+      <span><?= $this->verantwortlicheBehoerde ?></span>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($this->rechtsvorschriften): ?>
+    <div class="leistung__rechtsvorschriften" id="leistung-rechtsvorschriften">
+      <h2><?= $this->trans('BayernPortal.labels.legalBasis') ?></h2>
+      <ul>
+        <?php foreach ($this->rechtsvorschriften as $link): ?>
+          <?= $this->renderList($link) ?>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  <?php endif; ?>
+</div>

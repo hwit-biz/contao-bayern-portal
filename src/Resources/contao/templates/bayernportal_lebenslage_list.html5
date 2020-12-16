@@ -1,0 +1,4 @@
+
+<li class="lebenslage lebenslage--list">
+  <a href="<?= $this->link ?>"><?= $this->bezeichnung ?></a>
+</li>
