@@ -11,11 +11,12 @@ After installing this extension there will be a new back end module called _Baye
 
 ### Front End Modules
 
-The extension provides 5 different front end modules - one for each "main" entity type of the API:
+The extension provides 6 different front end modules - one for each "main" entity type of the API, plus some additional ones:
 
 * Ansprechpartner (Contacts)
 * Behörden (Administrations)
 * Dienststellen (Departments)
+* Dienststelle Leistungen (Services of a Department)
 * Lebenslagen (Circumstances)
 * Leistungen (Services)
 
