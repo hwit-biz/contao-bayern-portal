@@ -13,6 +13,7 @@ declare(strict_types=1);
 use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\AnsprechpartnerController;
 use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\BehoerdenController;
 use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\DienststellenController;
+use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\DienststellenLeistungenController;
 use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\LebenslagenController;
 use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\LeistungenController;
 
@@ -65,6 +66,13 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['bayernportal_lebenslagen_page'] = [
     'relation' => ['type' => 'hasOne', 'load' => 'lazy'],
 ];
 
+$GLOBALS['TL_DCA']['tl_module']['fields']['bayernportal_dienststelle'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'eval' => ['chosen' => 'true', 'tl_class' => 'w50', 'mandatory' => true, 'includeBlankOption' => true],
+    'sql' => ['type' => 'string', 'length' => 255, 'default' => ''],
+];
+
 $GLOBALS['TL_DCA']['tl_module']['palettes'][BehoerdenController::TYPE] =
     '{title_legend},name,headline,type;{config_legend},bayernportal_config;{redirect_legend},bayernportal_leistungen_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
 ;
@@ -83,4 +91,8 @@ $GLOBALS['TL_DCA']['tl_module']['palettes'][LebenslagenController::TYPE] =
 
 $GLOBALS['TL_DCA']['tl_module']['palettes'][DienststellenController::TYPE] =
     '{title_legend},name,headline,type;{config_legend},bayernportal_config;{redirect_legend},bayernportal_leistungen_page,bayernportal_lebenslagen_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
+;
+
+$GLOBALS['TL_DCA']['tl_module']['palettes'][DienststellenLeistungenController::TYPE] =
+    '{title_legend},name,headline,type;{config_legend},bayernportal_config,bayernportal_dienststelle;{redirect_legend},bayernportal_leistungen_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
 ;

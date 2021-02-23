@@ -23,6 +23,7 @@ use InspiredMinds\ContaoBayernPortal\ApiEntity\LeistungEntity;
 use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\AnsprechpartnerController;
 use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\BehoerdenController;
 use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\DienststellenController;
+use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\DienststellenLeistungenController;
 use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\LebenslagenController;
 use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\LeistungenController;
 
@@ -34,6 +35,7 @@ class TemplateOptionsListener
         AnsprechpartnerController::TYPE => AnsprechpartnerEntity::class,
         LebenslagenController::TYPE => LebenslageEntity::class,
         DienststellenController::TYPE => DienststelleEntity::class,
+        DienststellenLeistungenController::TYPE => LeistungEntity::class,
     ];
 
     /**

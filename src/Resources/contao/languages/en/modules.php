@@ -13,6 +13,7 @@ declare(strict_types=1);
 use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\AnsprechpartnerController;
 use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\BehoerdenController;
 use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\DienststellenController;
+use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\DienststellenLeistungenController;
 use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\LebenslagenController;
 use InspiredMinds\ContaoBayernPortal\Controller\FrontendModule\LeistungenController;
 
@@ -24,3 +25,4 @@ $GLOBALS['TL_LANG']['FMD'][LeistungenController::TYPE] = ['BayernPortal: Leistun
 $GLOBALS['TL_LANG']['FMD'][AnsprechpartnerController::TYPE] = ['BayernPortal: Ansprechpartner', 'List and Details of Ansprechpartner.'];
 $GLOBALS['TL_LANG']['FMD'][LebenslagenController::TYPE] = ['BayernPortal: Lebenslagen', 'List and Details of Lebenslagen.'];
 $GLOBALS['TL_LANG']['FMD'][DienststellenController::TYPE] = ['BayernPortal: Dienststellen', 'List and Details of Dienststellen.'];
+$GLOBALS['TL_LANG']['FMD'][DienststellenLeistungenController::TYPE] = ['BayernPortal: Dienststelle Leistungen', 'List of Leistungen for a Dienststelle.'];

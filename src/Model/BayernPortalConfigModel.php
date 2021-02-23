@@ -19,6 +19,7 @@ use Contao\Model;
  * @property int    $tstamp
  * @property string $username
  * @property string $password
+ * @property string $municipality_code
  */
 class BayernPortalConfigModel extends Model
 {

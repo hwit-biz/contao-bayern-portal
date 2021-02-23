@@ -21,7 +21,9 @@ use InspiredMinds\ContaoBayernPortal\ApiEntity\FormularEntity;
 use InspiredMinds\ContaoBayernPortal\ApiEntity\GebaeudeEntity;
 use InspiredMinds\ContaoBayernPortal\ApiEntity\LebenslageEntity;
 use InspiredMinds\ContaoBayernPortal\ApiEntity\LeistungEntity;
+use InspiredMinds\ContaoBayernPortal\Context;
 use InspiredMinds\ContaoBayernPortal\Model\BayernPortalConfigModel;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -30,13 +32,26 @@ class BayernPortalApi
 {
     public const API = 'https://www.bayernportal-webservices.bayern.de/rest/allgemein/v3/';
 
+    private static $cache = [];
+
+    private $context;
+    private $logger;
+
     private $username;
     private $password;
-    private static $cache = [];
 
     /** @var HttpClientInterface */
     private $client;
 
+    public function __construct(Context $context, ?LoggerInterface $logger)
+    {
+        $this->context = $context;
+        $this->logger = $logger;
+    }
+
+    /**
+     * Sets username and password for the API.
+     */
     public function setCredentials(string $username, string $password): self
     {
         $this->username = $username;
@@ -97,12 +112,18 @@ class BayernPortalApi
     /**
      * @return object|array
      */
-    public function get(string $url)
+    public function get(string $url, array $options = [])
     {
-        $cacheKey = $this->getCacheKey($url);
+        $cacheKey = $this->getCacheKey($url.md5(json_encode($options)));
 
         if (!isset(static::$cache[$cacheKey])) {
-            static::$cache[$cacheKey] = json_decode($this->getClient()->request(Request::METHOD_GET, $url)->getContent());
+            $response = $this->getClient()->request(Request::METHOD_GET, $url, $options);
+            static::$cache[$cacheKey] = json_decode($response->getContent());
+
+            if (null !== $this->logger) {
+                $info = $response->getInfo();
+                $this->logger->debug('BayernPortal request: '.json_encode($info));
+            }
         }
 
         return static::$cache[$cacheKey];
@@ -145,8 +166,10 @@ class BayernPortalApi
     /**
      * @return array<LeistungEntity>
      */
-    public function getBehoerdeLeistungen(int $behoerdeId): array
+    public function getBehoerdeLeistungen(int $behoerdeId, array $options = []): array
     {
+        $options = $this->applyMunicipalityParameter($options);
+
         $data = $this->get('behoerden/'.$behoerdeId.'/leistungen');
 
         return $this->collectionFactory($data->leistung, LeistungEntity::class);
@@ -155,9 +178,11 @@ class BayernPortalApi
     /**
      * @return array<LeistungEntity>
      */
-    public function getLeistungen(): array
+    public function getLeistungen(array $options = []): array
     {
-        $data = $this->get('leistungen');
+        $options = $this->applyMunicipalityParameter($options);
+
+        $data = $this->get('leistungen', $options);
 
         return $this->collectionFactory($data->leistung, LeistungEntity::class);
     }
@@ -199,8 +224,10 @@ class BayernPortalApi
     /**
      * @return array<LeistungEntity>
      */
-    public function getAnsprechpartnerLeistungen(int $ansprechpartnerId): array
+    public function getAnsprechpartnerLeistungen(int $ansprechpartnerId, array $options = []): array
     {
+        $options = $this->applyMunicipalityParameter($options);
+
         $data = $this->get('ansprechpartner/'.$ansprechpartnerId.'/leistungen');
 
         return $this->collectionFactory($data->leistung, LeistungEntity::class);
@@ -233,7 +260,7 @@ class BayernPortalApi
         return $this->collectionFactory($data->dienststelle, DienststelleEntity::class);
     }
 
-    public function getDienststelle(int $dienststelleId): DienststelleEntity
+    public function getDienststelle(int $dienststelleId, array $options = []): DienststelleEntity
     {
         $data = $this->get('dienststellen/'.$dienststelleId);
 
@@ -241,7 +268,9 @@ class BayernPortalApi
         $dienststelle = DienststelleEntity::factory($data->dienststelle[0]);
 
         $dienststelle->leistungen = function () use ($dienststelle): array {
-            $data = $this->get('dienststellen/'.$dienststelle->dienststellenschluessel.'/leistungsbeschreibungen');
+            $options = $this->applyMunicipalityParameter();
+
+            $data = $this->get('dienststellen/'.$dienststelle->dienststellenschluessel.'/leistungsbeschreibungen', $options);
 
             return $this->collectionFactory($data->leistungsbeschreibung, LeistungEntity::class);
         };
@@ -259,8 +288,19 @@ class BayernPortalApi
         return $dienststelle;
     }
 
-    public function getDienststelleFormulare(string $dienststellenschluessel): array
+    public function getDienststelleLeistungen(string $dienststellenschluessel, array $options = []): array
     {
+        $options = $this->applyMunicipalityParameter($options);
+
+        $data = $this->get('dienststellen/'.$dienststellenschluessel.'/leistungen', $options);
+
+        return $this->collectionFactory($data->leistung, LeistungEntity::class);
+    }
+
+    public function getDienststelleFormulare(string $dienststellenschluessel, array $options = []): array
+    {
+        $options = $this->applyMunicipalityParameter($options);
+
         $data = $this->get('dienststellen/'.$dienststellenschluessel.'/formulare');
 
         $formulare = [];
@@ -297,5 +337,20 @@ class BayernPortalApi
     private function getCacheKey(string $url): string
     {
         return md5(implode(',', [$this->username, $this->password, $url]));
+    }
+
+    private function applyMunicipalityParameter(array $options = []): array
+    {
+        $config = $this->context->getConfig();
+
+        if (null === $config) {
+            return $options;
+        }
+
+        if (empty($config->municipality_code)) {
+            return $options;
+        }
+
+        return array_merge_recursive(['query' => ['gemeindekennziffer' => $config->municipality_code]], $options);
     }
 }

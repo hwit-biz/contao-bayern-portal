@@ -14,6 +14,7 @@ namespace InspiredMinds\ContaoBayernPortal;
 
 use Contao\Model;
 use Contao\PageModel;
+use InspiredMinds\ContaoBayernPortal\Model\BayernPortalConfigModel;
 
 class Context
 {
@@ -62,5 +63,18 @@ class Context
         }
 
         return PageModel::findByPk($this->model->bayernportal_behoerden_page);
+    }
+
+    public function getConfig(): ?BayernPortalConfigModel
+    {
+        if (empty($this->model)) {
+            return null;
+        }
+
+        if (empty($this->model->bayernportal_config)) {
+            return null;
+        }
+
+        return BayernPortalConfigModel::findById($this->model->bayernportal_config);
     }
 }

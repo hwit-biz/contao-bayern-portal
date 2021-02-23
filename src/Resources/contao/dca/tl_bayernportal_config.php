@@ -78,8 +78,14 @@ $GLOBALS['TL_DCA']['tl_bayernportal_config'] = [
             'eval' => ['tl_class' => 'w50', 'maxlength' => 255, 'mandatory' => true, 'doNotShow' => true],
             'sql' => ['type' => 'string', 'length' => 255, 'default' => ''],
         ],
+        'municipality_code' => [
+            'exclude' => true,
+            'inputType' => 'text',
+            'eval' => ['tl_class' => 'w50', 'maxlength' => 255],
+            'sql' => ['type' => 'string', 'length' => 255, 'default' => ''],
+        ],
     ],
     'palettes' => [
-        'default' => '{config_legend},name,username,password',
+        'default' => '{config_legend},name,username,password,municipality_code',
     ],
 ];
