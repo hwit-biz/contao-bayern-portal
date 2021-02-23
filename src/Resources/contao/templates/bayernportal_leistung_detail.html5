@@ -69,4 +69,15 @@
       </ul>
     </div>
   <?php endif; ?>
+
+  <?php if ($this->onlineVerfahren): ?>
+    <div class="leistung__onlineverfahren" id="leistung-onlineverfahren">
+      <h2><?= $this->trans('BayernPortal.labels.onlineTransactions') ?></h2>
+      <ul>
+        <?php foreach ($this->onlineVerfahren as $link): ?>
+          <?= $this->renderList($link) ?>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  <?php endif; ?>
 </div>

@@ -187,9 +187,21 @@ class BayernPortalApi
         return $this->collectionFactory($data->leistung, LeistungEntity::class);
     }
 
-    public function getLeistung(int $leistungId): LeistungEntity
+    public function getLeistung(int $leistungId, array $options = []): LeistungEntity
     {
-        $data = $this->get('leistungsbeschreibungen/'.$leistungId);
+        $options = $this->applyMunicipalityParameter(['query' => ['mitRegionalenErgaenzungen' => true]]);
+
+        $data = $this->get('leistungsbeschreibungen/'.$leistungId, $options);
+
+        if (!empty($data->regionaleErgaenzungen) && !empty($data->regionaleErgaenzungen->regionaleErgaenzung)) {
+            $addition = $this->get('leistungsbeschreibungen/'.$data->regionaleErgaenzungen->regionaleErgaenzung[0]->id, $this->applyMunicipalityParameter());
+
+            foreach ($addition as $property => $value) {
+                if (!isset($data->{$property})) {
+                    $data->{$property} = $value;
+                }
+            }
+        }
 
         return LeistungEntity::factory($data);
     }
@@ -268,7 +280,7 @@ class BayernPortalApi
         $dienststelle = DienststelleEntity::factory($data->dienststelle[0]);
 
         $dienststelle->leistungen = function () use ($dienststelle): array {
-            $options = $this->applyMunicipalityParameter();
+            $options = $this->applyMunicipalityParameter(['query' => ['mitRegionalenErgaenzungen' => true]]);
 
             $data = $this->get('dienststellen/'.$dienststelle->dienststellenschluessel.'/leistungsbeschreibungen', $options);
 

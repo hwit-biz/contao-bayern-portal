@@ -106,6 +106,16 @@ class LeistungEntity extends AbstractEntity
             $entity->rechtsvorschriften = $rechtsvorschriften;
         }
 
+        if (!empty($entity->onlineVerfahren)) {
+            $onlineVerfahren = [];
+
+            foreach ($entity->onlineVerfahren->onlineVerfahren as $link) {
+                $onlineVerfahren[] = LinkEntity::factory($link);
+            }
+
+            $entity->onlineVerfahren = $onlineVerfahren;
+        }
+
         return $entity;
     }
 }
