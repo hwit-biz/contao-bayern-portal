@@ -331,6 +331,15 @@ class BayernPortalApi
             $collection[] = $class::factory($record);
         }
 
+        // Sort the collection if we have a "sortierreihenfolge" property
+        if (!empty($collection) && property_exists($class, 'sortierreihenfolge')) {
+            usort($collection, function ($a, $b) {
+                /* @var AbstractEntity $a */
+                /* @var AbstractEntity $b */
+                return (int) $a->sortierreihenfolge - (int) $b->sortierreihenfolge;
+            });
+        }
+
         return $collection;
     }
 
