@@ -50,9 +50,8 @@ class AnsprechpartnerController extends AbstractFrontendModuleController
         $ansprechpartnerId = Input::get(AnsprechpartnerEntity::getType());
 
         if (null !== $ansprechpartnerId) {
-            global $objPage;
             $ansprechpartner = $this->api->getAnsprechpartner((int) $ansprechpartnerId);
-            $objPage->pageTitle = strip_tags(StringUtil::stripInsertTags($ansprechpartner->vorname.' '.$ansprechpartner->nachname));
+            $this->getPageModel()->pageTitle = strip_tags(StringUtil::stripInsertTags($ansprechpartner->vorname.' '.$ansprechpartner->nachname));
             $this->context->setBehoerdeId((int) $ansprechpartner->behoerdeId);
             $template->headline = null;
             $template->detail = $ansprechpartner;

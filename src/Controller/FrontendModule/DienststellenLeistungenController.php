@@ -19,6 +19,7 @@ use Contao\ModuleModel;
 use Contao\StringUtil;
 use Contao\Template;
 use InspiredMinds\ContaoBayernPortal\Api\BayernPortalApi;
+use InspiredMinds\ContaoBayernPortal\ApiEntity\BehoerdeEntity;
 use InspiredMinds\ContaoBayernPortal\ApiEntity\LeistungEntity;
 use InspiredMinds\ContaoBayernPortal\Context;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,19 +48,29 @@ class DienststellenLeistungenController extends AbstractFrontendModuleController
         }
 
         $this->context->setModel($model);
+        $this->context->setLeistungenPage($this->getPageModel());
         $this->api->setModel($model);
 
         $template->parentBlock = 'block_unsearchable';
 
         $leistungId = Input::get(LeistungEntity::getType());
+        $behoerdeId = Input::get(BehoerdeEntity::getType());
+        $currentPage = $this->getPageModel();
 
         if (null !== $leistungId) {
             $template->headline = null;
             $template->detail = $this->api->getLeistung((int) $leistungId);
-            global $objPage;
-            $objPage->pageTitle = strip_tags(StringUtil::stripInsertTags($template->detail->bezeichnung));
+            $currentPage->pageTitle = strip_tags(StringUtil::stripInsertTags($template->detail->bezeichnung));
             $template->parentBlock = 'block_searchable';
             $template->class .= ' mod--detail mod--leistung';
+        } elseif (null !== $behoerdeId) {
+            $this->context->setBehoerdeId((int) $behoerdeId);
+            $template->headline = null;
+            $template->detail = $this->api->getBehoerde((int) $behoerdeId);
+            $currentPage->pageTitle = strip_tags(StringUtil::stripInsertTags($template->detail->bezeichnung));
+            $template->parentBlock = 'block_searchable';
+            $template->class .= ' detail behoerde';
+            $template->bayernportal_detail_template = null;
         } else {
             $template->list = $this->api->getDienststelleLeistungen($model->bayernportal_dienststelle);
             $template->class .= ' list';

@@ -24,6 +24,9 @@ class Context
     /** @var int */
     public $behoerdeId;
 
+    /** @var PageModel */
+    private $leistungenPage;
+
     public function setModel(Model $model): self
     {
         $this->model = $model;
@@ -38,8 +41,19 @@ class Context
         return $this;
     }
 
+    public function setLeistungenPage(PageModel $page): self
+    {
+        $this->leistungenPage = $page;
+
+        return $this;
+    }
+
     public function getLeistungenPage(): ?PageModel
     {
+        if (null !== $this->leistungenPage) {
+            return $this->leistungenPage;
+        }
+
         if (null === $this->model || empty($this->model->bayernportal_leistungen_page)) {
             return null;
         }

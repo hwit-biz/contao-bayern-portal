@@ -43,6 +43,11 @@ class BehoerdeEntity extends AbstractEntity
     {
         $entity = parent::factory($record);
 
+        if (!empty($entity->behoerdId)) {
+            $entity->id = $entity->behoerdId;
+            unset($entity->behoerdId);
+        }
+
         if (!empty($entity->behoerdenGebaeudeZuordnungen)) {
             $behoerdenGebaeudeZuordnungen = [];
 

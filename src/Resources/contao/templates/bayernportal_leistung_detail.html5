@@ -59,6 +59,17 @@
     </div>
   <?php endif; ?>
 
+  <?php if ($this->zustaendigkeiten): ?>
+    <div class="leistung__zustaendigkeiten" id="leistung-zustaendigkeiten">
+      <h2><?= $this->trans('BayernPortal.labels.responsibleAdministrations') ?></h2>
+      <ul>
+        <?php foreach ($this->zustaendigkeiten as $behoerde): ?>
+          <?= $this->renderList($behoerde) ?>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  <?php endif; ?>
+
   <?php if ($this->rechtsvorschriften): ?>
     <div class="leistung__rechtsvorschriften" id="leistung-rechtsvorschriften">
       <h2><?= $this->trans('BayernPortal.labels.legalBasis') ?></h2>

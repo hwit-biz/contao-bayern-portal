@@ -27,6 +27,8 @@ class LeistungEntity extends AbstractEntity
     public $verwandteLeistungen;
     public $stand;
     public $verantwortlicheBehoerde;
+    public $zustaendigkeiten;
+    public $onlineVerfahren;
 
     public function hasBasic(): bool
     {
@@ -70,6 +72,16 @@ class LeistungEntity extends AbstractEntity
 
         if (!empty($entity->verantwortlicheBehoerde)) {
             $entity->verantwortlicheBehoerde = $entity->verantwortlicheBehoerde->value ?? null;
+        }
+
+        if (!empty($entity->zustaendigkeiten)) {
+            $behoerden = [];
+
+            foreach ($entity->zustaendigkeiten->zustaendig as $behoerde) {
+                $behoerden[] = BehoerdeEntity::factory($behoerde);
+            }
+
+            $entity->zustaendigkeiten = $behoerden;
         }
 
         if (!empty($entity->stand)) {

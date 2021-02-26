@@ -57,36 +57,35 @@ class BehoerdenController extends AbstractFrontendModuleController
 
         if (null !== $behoerdeId) {
             $this->context->setBehoerdeId((int) $behoerdeId);
-
-            global $objPage;
+            $currentPage = $this->getPageModel();
 
             if (null !== $ansprechpartnerId) {
                 $template->headline = null;
                 $template->detail = $this->api->getAnsprechpartner((int) $ansprechpartnerId);
-                $objPage->pageTitle = strip_tags(StringUtil::stripInsertTags($$template->detail->vorname.' '.$template->detail->nachname));
+                $currentPage->pageTitle = strip_tags(StringUtil::stripInsertTags($$template->detail->vorname.' '.$template->detail->nachname));
                 $template->parentBlock = 'block_searchable';
                 $template->class .= ' mod--detail mod--ansprechpartner';
                 $template->bayernportal_detail_template = null;
             } elseif (null !== $leistungId) {
                 $template->headline = null;
                 $template->detail = $this->api->getLeistung((int) $leistungId);
-                $objPage->pageTitle = strip_tags(StringUtil::stripInsertTags($template->detail->bezeichnung));
+                $currentPage->pageTitle = strip_tags(StringUtil::stripInsertTags($template->detail->bezeichnung));
                 $template->parentBlock = 'block_searchable';
                 $template->class .= ' mod--detail mod--leistung';
                 $template->bayernportal_detail_template = null;
             } elseif (null !== $gebaeudeId) {
                 $template->headline = null;
                 $template->detail = $this->api->getGebaeude((int) $behoerdeId, (int) $gebaeudeId);
-                $objPage->pageTitle = strip_tags(StringUtil::stripInsertTags($template->detail->bezeichnung));
+                $currentPage->pageTitle = strip_tags(StringUtil::stripInsertTags($template->detail->bezeichnung));
                 $template->parentBlock = 'block_searchable';
                 $template->class .= ' mod--detail mod--gebaeude';
                 $template->bayernportal_detail_template = null;
             } else {
                 $template->headline = null;
                 $template->detail = $this->api->getBehoerde((int) $behoerdeId);
-                $objPage->pageTitle = strip_tags(StringUtil::stripInsertTags($template->detail->bezeichnung));
+                $currentPage->pageTitle = strip_tags(StringUtil::stripInsertTags($template->detail->bezeichnung));
                 $template->parentBlock = 'block_searchable';
-                $template->class .= ' detail behoerde';
+                $template->class .= ' mon--detail mod--behoerde';
             }
         } else {
             $template->list = $this->api->getBehoerden();

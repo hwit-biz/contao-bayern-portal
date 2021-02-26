@@ -24,7 +24,7 @@
     ],
     "require": {
         "php": "^7.2 || ^8.0",
-        "contao/core-bundle": "^4.9",
+        "contao/core-bundle": "^4.9.10",
         "symfony/http-client": "^4.4 || ^5.1"
     },
     "autoload": {

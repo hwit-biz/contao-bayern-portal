@@ -52,8 +52,7 @@ class LebenslagenController extends AbstractFrontendModuleController
         if (null !== $lebenslageId) {
             $template->headline = null;
             $template->detail = $this->api->getLebenslage((int) $lebenslageId);
-            global $objPage;
-            $objPage->pageTitle = strip_tags(StringUtil::stripInsertTags($template->detail->bezeichnung));
+            $this->getPageModel()->pageTitle = strip_tags(StringUtil::stripInsertTags($template->detail->bezeichnung));
             $template->parentBlock = 'block_searchable';
             $template->class .= ' mod--detail mod--lebenslage';
         } else {

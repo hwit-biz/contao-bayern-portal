@@ -52,8 +52,7 @@ class DienststellenController extends AbstractFrontendModuleController
         if (null !== $dienststelleId) {
             $template->headline = null;
             $template->detail = $this->api->getDienststelle((int) $dienststelleId);
-            global $objPage;
-            $objPage->pageTitle = strip_tags(StringUtil::stripInsertTags($template->detail->bezeichnung));
+            $this->getPageModel()->pageTitle = strip_tags(StringUtil::stripInsertTags($template->detail->bezeichnung));
             $template->parentBlock = 'block_searchable';
             $template->class .= ' mod--detail mod--dienststelle';
         } else {

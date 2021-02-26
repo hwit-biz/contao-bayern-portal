@@ -35,6 +35,7 @@ $GLOBALS['TL_LANG']['BayernPortal']['labels']['postalAddress'] = 'Postanschrift'
 $GLOBALS['TL_LANG']['BayernPortal']['labels']['synonyms'] = 'Synonyme';
 $GLOBALS['TL_LANG']['BayernPortal']['labels']['links'] = 'Links';
 $GLOBALS['TL_LANG']['BayernPortal']['labels']['responsibleAdministration'] = 'Verantwortliche Behörde';
+$GLOBALS['TL_LANG']['BayernPortal']['labels']['responsibleAdministrations'] = 'Zuständige Behördenstellen';
 $GLOBALS['TL_LANG']['BayernPortal']['labels']['legalBasis'] = 'Rechtsgrundlagen';
 $GLOBALS['TL_LANG']['BayernPortal']['labels']['onlineTransactions'] = 'Online Verfahren';
 $GLOBALS['TL_LANG']['BayernPortal']['msgs']['appointmentsOnly'] = 'Nur nach Vereinbarung.';

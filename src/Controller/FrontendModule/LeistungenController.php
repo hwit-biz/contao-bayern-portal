@@ -43,6 +43,7 @@ class LeistungenController extends AbstractFrontendModuleController
     protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
     {
         $this->context->setModel($model);
+        $this->context->setLeistungenPage($this->getPageModel());
         $this->api->setModel($model);
 
         $template->parentBlock = 'block_unsearchable';
@@ -52,8 +53,7 @@ class LeistungenController extends AbstractFrontendModuleController
         if (null !== $leistungId) {
             $template->headline = null;
             $template->detail = $this->api->getLeistung((int) $leistungId);
-            global $objPage;
-            $objPage->pageTitle = strip_tags(StringUtil::stripInsertTags($template->detail->bezeichnung));
+            $this->getPageModel()->pageTitle = strip_tags(StringUtil::stripInsertTags($template->detail->bezeichnung));
             $template->parentBlock = 'block_searchable';
             $template->class .= ' mod--detail mod--leistung';
         } else {

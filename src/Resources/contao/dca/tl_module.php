@@ -94,5 +94,5 @@ $GLOBALS['TL_DCA']['tl_module']['palettes'][DienststellenController::TYPE] =
 ;
 
 $GLOBALS['TL_DCA']['tl_module']['palettes'][DienststellenLeistungenController::TYPE] =
-    '{title_legend},name,headline,type;{config_legend},bayernportal_config,bayernportal_dienststelle;{redirect_legend},bayernportal_leistungen_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
+    '{title_legend},name,headline,type;{config_legend},bayernportal_config,bayernportal_dienststelle;{redirect_legend},bayernportal_leistungen_page,bayernportal_behoerden_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
 ;

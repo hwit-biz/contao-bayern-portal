@@ -87,6 +87,7 @@ class EntityLinkCreator
         if (null !== ($leistungenPage = $this->context->getLeistungenPage())) {
             return $leistungenPage->getFrontendUrl($params);
         }
+
         if (null !== $this->context->behoerdeId) {
             $page = $this->context->getBehoerdenPage() ?? $page;
             $params = '/'.BehoerdeEntity::getType().'/'.$this->context->behoerdeId.$params;
