@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace InspiredMinds\ContaoBayernPortal\Controller\FrontendModule;
 
-use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 use Contao\CoreBundle\ServiceAnnotation\FrontendModule;
 use Contao\Input;
 use Contao\ModuleModel;
@@ -27,7 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @FrontendModule(LeistungenController::TYPE, category="bayernportal", template="mod_bayern_portal")
  */
-class LeistungenController extends AbstractFrontendModuleController
+class LeistungenController extends AbstractLeistungenController
 {
     public const TYPE = 'bayern_portal_leistungen';
 
@@ -57,7 +56,10 @@ class LeistungenController extends AbstractFrontendModuleController
             $template->parentBlock = 'block_searchable';
             $template->class .= ' mod--detail mod--leistung';
         } else {
-            $template->list = $this->api->getLeistungen();
+            $data = $this->api->getLeistungen();
+            $filter = $this->getAlphabetFilter($data, $request, $this->translator);
+            $template->filter = $filter;
+            $template->list = $this->getFilteredList($data, $request);
             $template->class .= ' list';
         }
 

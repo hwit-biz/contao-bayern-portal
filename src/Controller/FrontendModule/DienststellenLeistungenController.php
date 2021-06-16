@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace InspiredMinds\ContaoBayernPortal\Controller\FrontendModule;
 
-use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 use Contao\CoreBundle\ServiceAnnotation\FrontendModule;
 use Contao\Input;
 use Contao\ModuleModel;
@@ -24,21 +23,24 @@ use InspiredMinds\ContaoBayernPortal\ApiEntity\LeistungEntity;
 use InspiredMinds\ContaoBayernPortal\Context;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @FrontendModule(DienststellenLeistungenController::TYPE, category="bayernportal", template="mod_bayern_portal")
  */
-class DienststellenLeistungenController extends AbstractFrontendModuleController
+class DienststellenLeistungenController extends AbstractLeistungenController
 {
     public const TYPE = 'bayern_portal_dienststellen_leistungen';
 
     private $api;
     private $context;
+    private $translator;
 
-    public function __construct(BayernPortalApi $api, Context $context)
+    public function __construct(BayernPortalApi $api, Context $context, TranslatorInterface $translator)
     {
         $this->api = $api;
         $this->context = $context;
+        $this->translator = $translator;
     }
 
     protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
@@ -72,7 +74,10 @@ class DienststellenLeistungenController extends AbstractFrontendModuleController
             $template->class .= ' detail behoerde';
             $template->bayernportal_detail_template = null;
         } else {
-            $template->list = $this->api->getDienststelleLeistungen($model->bayernportal_dienststelle);
+            $data = $this->api->getDienststelleLeistungen($model->bayernportal_dienststelle);
+            $filter = $this->getAlphabetFilter($data, $request, $this->translator);
+            $template->filter = $filter;
+            $template->list = $this->getFilteredList($data, $request);
             $template->class .= ' list';
         }
 

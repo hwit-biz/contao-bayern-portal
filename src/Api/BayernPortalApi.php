@@ -123,6 +123,7 @@ class BayernPortalApi
             if (null !== $this->logger) {
                 $info = $response->getInfo();
                 $this->logger->debug('BayernPortal request: '.json_encode($info));
+                $this->logger->debug('BayernPortal response: '.$response->getContent());
             }
         }
 

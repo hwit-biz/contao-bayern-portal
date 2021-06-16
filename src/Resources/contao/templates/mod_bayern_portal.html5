@@ -5,7 +5,14 @@
   <?php if ($this->detail): ?>
     <?= $this->renderDetail($this->detail) ?>
   <?php elseif ($this->list): ?>
-    <ul>
+    <?php if ($this->filter): ?>
+      <ul class="<?= $this->type ?>__filter">
+        <?php foreach ($this->filter as $filter => $url): ?>
+          <li><a href="<?= $url ?>"><?= $filter ?></a></li>
+        <?php endforeach; ?>
+      </ul>
+    <?php endif; ?>
+    <ul class="<?= $this->type ?>__list">
       <?php foreach ($this->list as $element): ?>
         <?= $this->renderList($element) ?>
       <?php endforeach; ?>
