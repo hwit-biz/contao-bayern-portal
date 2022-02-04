@@ -18,4 +18,4 @@ $GLOBALS['TL_LANG']['tl_module']['bayernportal_leistungen_page'] = ['Leistungen 
 $GLOBALS['TL_LANG']['tl_module']['bayernportal_lebenslagen_page'] = ['Lebenslagen page', 'The page where details of Lebenslagen can be shown.'];
 $GLOBALS['TL_LANG']['tl_module']['bayernportal_dienststelle'] = ['Dienststelle', 'The chosen Dienststelle for this module.'];
 $GLOBALS['TL_LANG']['tl_module']['bayernportal_sorting'] = ['Sorting', 'How the list should be sorted.'];
-$GLOBALS['TL_LANG']['tl_module']['bayernportal_sorting_options'] = ['alphabetical' => 'Alphabetical'];
+$GLOBALS['TL_LANG']['tl_module']['bayernportal_sorting_options'] = ['alphabetical' => 'Alphabetical', 'custom' => 'Custom'];

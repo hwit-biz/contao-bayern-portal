@@ -61,6 +61,8 @@ class AnsprechpartnerController extends AbstractBayernPortalModuleController
 
             if ('alphabetical' === $model->bayernportal_sorting) {
                 $data = $this->sortData($data, 'nachname');
+            } elseif ('custom' === $model->bayernportal_sorting) {
+                $data = $this->sortData($data, 'sortierreihenfolge', 'numerical');
             }
 
             $template->list = $data;

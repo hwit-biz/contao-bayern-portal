@@ -91,6 +91,8 @@ class BehoerdenController extends AbstractBayernPortalModuleController
 
             if ('alphabetical' === $model->bayernportal_sorting) {
                 $data = $this->sortData($data);
+            } elseif ('custom' === $model->bayernportal_sorting) {
+                $data = $this->sortData($data, 'sortierreihenfolge', 'numerical');
             }
 
             $template->list = $data;

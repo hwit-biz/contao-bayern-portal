@@ -19,9 +19,13 @@ abstract class AbstractBayernPortalModuleController extends AbstractFrontendModu
     /**
      * @param array<object> $data
      */
-    protected function sortData(array $data, string $property = 'bezeichnung'): array
+    protected function sortData(array $data, string $property = 'bezeichnung', string $type = 'alphabetically'): array
     {
-        usort($data, static function ($a, $b) use ($property): int {
+        usort($data, static function ($a, $b) use ($property, $type): int {
+            if ('numerical' === $type) {
+                return (int) $a->{$property} - (int) $b->{$property};
+            }
+
             return strcmp($a->{$property}, $b->{$property});
         });
 

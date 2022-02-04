@@ -76,7 +76,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['bayernportal_dienststelle'] = [
 $GLOBALS['TL_DCA']['tl_module']['fields']['bayernportal_sorting'] = [
     'exclude' => true,
     'inputType' => 'select',
-    'options' => ['alphabetical'],
+    'options' => ['alphabetical', 'custom'],
     'reference' => &$GLOBALS['TL_LANG']['tl_module']['bayernportal_sorting_options'],
     'eval' => ['tl_class' => 'w50', 'includeBlankOption' => true],
     'sql' => ['type' => 'string', 'length' => 16, 'default' => ''],

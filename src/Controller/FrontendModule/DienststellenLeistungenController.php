@@ -78,6 +78,8 @@ class DienststellenLeistungenController extends AbstractLeistungenController
 
             if ('alphabetical' === $model->bayernportal_sorting) {
                 $data = $this->sortData($data);
+            } elseif ('custom' === $model->bayernportal_sorting) {
+                $data = $this->sortData($data, 'sortierreihenfolge', 'numerical');
             }
 
             $filter = $this->getAlphabetFilter($data, $request, $this->translator);
