@@ -1,1 +1,2 @@
 all: Alle
+invalid_credentials: Ungültige Anmeldedaten. Verifizieren Sie Benutzername und Passwort.
