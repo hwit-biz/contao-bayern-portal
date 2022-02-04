@@ -57,6 +57,11 @@ class LeistungenController extends AbstractLeistungenController
             $template->class .= ' mod--detail mod--leistung';
         } else {
             $data = $this->api->getLeistungen();
+
+            if ('alphabetical' === $model->bayernportal_sorting) {
+                $data = $this->sortData($data);
+            }
+
             $filter = $this->getAlphabetFilter($data, $request, $this->translator);
             $template->filter = $filter;
             $template->list = $this->getFilteredList($data, $request);

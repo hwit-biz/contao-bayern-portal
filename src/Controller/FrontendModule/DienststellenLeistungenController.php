@@ -75,6 +75,11 @@ class DienststellenLeistungenController extends AbstractLeistungenController
             $template->bayernportal_detail_template = null;
         } else {
             $data = $this->api->getDienststelleLeistungen($model->bayernportal_dienststelle);
+
+            if ('alphabetical' === $model->bayernportal_sorting) {
+                $data = $this->sortData($data);
+            }
+
             $filter = $this->getAlphabetFilter($data, $request, $this->translator);
             $template->filter = $filter;
             $template->list = $this->getFilteredList($data, $request);

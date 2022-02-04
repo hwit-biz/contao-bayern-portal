@@ -73,26 +73,35 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['bayernportal_dienststelle'] = [
     'sql' => ['type' => 'string', 'length' => 255, 'default' => ''],
 ];
 
+$GLOBALS['TL_DCA']['tl_module']['fields']['bayernportal_sorting'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'options' => ['alphabetical'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_module']['bayernportal_sorting_options'],
+    'eval' => ['tl_class' => 'w50', 'includeBlankOption' => true],
+    'sql' => ['type' => 'string', 'length' => 16, 'default' => ''],
+];
+
 $GLOBALS['TL_DCA']['tl_module']['palettes'][BehoerdenController::TYPE] =
-    '{title_legend},name,headline,type;{config_legend},bayernportal_config;{redirect_legend},bayernportal_leistungen_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
+    '{title_legend},name,headline,type;{config_legend},bayernportal_config,bayernportal_sorting;{redirect_legend},bayernportal_leistungen_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
 ;
 
 $GLOBALS['TL_DCA']['tl_module']['palettes'][LeistungenController::TYPE] =
-    '{title_legend},name,headline,type;{config_legend},bayernportal_config;{redirect_legend},bayernportal_lebenslagen_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
+    '{title_legend},name,headline,type;{config_legend},bayernportal_config,bayernportal_sorting;{redirect_legend},bayernportal_lebenslagen_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
 ;
 
 $GLOBALS['TL_DCA']['tl_module']['palettes'][AnsprechpartnerController::TYPE] =
-    '{title_legend},name,headline,type;{config_legend},bayernportal_config;{redirect_legend},bayernportal_behoerden_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
+    '{title_legend},name,headline,type;{config_legend},bayernportal_config,bayernportal_sorting;{redirect_legend},bayernportal_behoerden_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
 ;
 
 $GLOBALS['TL_DCA']['tl_module']['palettes'][LebenslagenController::TYPE] =
-    '{title_legend},name,headline,type;{config_legend},bayernportal_config;{redirect_legend},bayernportal_leistungen_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
+    '{title_legend},name,headline,type;{config_legend},bayernportal_config,bayernportal_sorting;{redirect_legend},bayernportal_leistungen_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
 ;
 
 $GLOBALS['TL_DCA']['tl_module']['palettes'][DienststellenController::TYPE] =
-    '{title_legend},name,headline,type;{config_legend},bayernportal_config;{redirect_legend},bayernportal_leistungen_page,bayernportal_lebenslagen_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
+    '{title_legend},name,headline,type;{config_legend},bayernportal_config,bayernportal_sorting;{redirect_legend},bayernportal_leistungen_page,bayernportal_lebenslagen_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
 ;
 
 $GLOBALS['TL_DCA']['tl_module']['palettes'][DienststellenLeistungenController::TYPE] =
-    '{title_legend},name,headline,type;{config_legend},bayernportal_config,bayernportal_dienststelle;{redirect_legend},bayernportal_leistungen_page,bayernportal_behoerden_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
+    '{title_legend},name,headline,type;{config_legend},bayernportal_config,bayernportal_dienststelle,bayernportal_sorting;{redirect_legend},bayernportal_leistungen_page,bayernportal_behoerden_page;{template_legend:hide},bayernportal_list_template,bayernportal_detail_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID'
 ;

@@ -12,12 +12,11 @@ declare(strict_types=1);
 
 namespace InspiredMinds\ContaoBayernPortal\Controller\FrontendModule;
 
-use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 use InspiredMinds\ContaoBayernPortal\ApiEntity\LeistungEntity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-abstract class AbstractLeistungenController extends AbstractFrontendModuleController
+abstract class AbstractLeistungenController extends AbstractBayernPortalModuleController
 {
     /**
      * @return array<string,string>

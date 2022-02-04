@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace InspiredMinds\ContaoBayernPortal\Controller\FrontendModule;
 
-use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 use Contao\CoreBundle\ServiceAnnotation\FrontendModule;
 use Contao\Input;
 use Contao\ModuleModel;
@@ -27,7 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @FrontendModule(AnsprechpartnerController::TYPE, category="bayernportal", template="mod_bayern_portal")
  */
-class AnsprechpartnerController extends AbstractFrontendModuleController
+class AnsprechpartnerController extends AbstractBayernPortalModuleController
 {
     public const TYPE = 'bayern_portal_ansprechpartner';
 
@@ -58,7 +57,13 @@ class AnsprechpartnerController extends AbstractFrontendModuleController
             $template->parentBlock = 'block_searchable';
             $template->class .= ' mod--detail mod--leistung';
         } else {
-            $template->list = $this->api->getAnsprechpartnerList();
+            $data = $this->api->getAnsprechpartnerList();
+
+            if ('alphabetical' === $model->bayernportal_sorting) {
+                $data = $this->sortData($data, 'nachname');
+            }
+
+            $template->list = $data;
             $template->class .= ' list';
         }
 

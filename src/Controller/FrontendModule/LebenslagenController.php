@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace InspiredMinds\ContaoBayernPortal\Controller\FrontendModule;
 
-use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 use Contao\CoreBundle\ServiceAnnotation\FrontendModule;
 use Contao\Input;
 use Contao\ModuleModel;
@@ -27,7 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @FrontendModule(LebenslagenController::TYPE, category="bayernportal", template="mod_bayern_portal")
  */
-class LebenslagenController extends AbstractFrontendModuleController
+class LebenslagenController extends AbstractBayernPortalModuleController
 {
     public const TYPE = 'bayern_portal_lebenslagen';
 
@@ -56,7 +55,13 @@ class LebenslagenController extends AbstractFrontendModuleController
             $template->parentBlock = 'block_searchable';
             $template->class .= ' mod--detail mod--lebenslage';
         } else {
-            $template->list = $this->api->getLebenslagen();
+            $data = $this->api->getLebenslagen();
+
+            if ('alphabetical' === $model->bayernportal_sorting) {
+                $data = $this->sortData($data);
+            }
+
+            $template->list = $data;
             $template->class .= ' list';
         }
 

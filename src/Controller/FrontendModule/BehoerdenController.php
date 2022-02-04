@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace InspiredMinds\ContaoBayernPortal\Controller\FrontendModule;
 
-use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 use Contao\CoreBundle\ServiceAnnotation\FrontendModule;
 use Contao\Input;
 use Contao\ModuleModel;
@@ -30,7 +29,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @FrontendModule(BehoerdenController::TYPE, category="bayernportal", template="mod_bayern_portal")
  */
-class BehoerdenController extends AbstractFrontendModuleController
+class BehoerdenController extends AbstractBayernPortalModuleController
 {
     public const TYPE = 'bayern_portal_behoerden';
 
@@ -88,7 +87,13 @@ class BehoerdenController extends AbstractFrontendModuleController
                 $template->class .= ' mon--detail mod--behoerde';
             }
         } else {
-            $template->list = $this->api->getBehoerden();
+            $data = $this->api->getBehoerden();
+
+            if ('alphabetical' === $model->bayernportal_sorting) {
+                $data = $this->sortData($data);
+            }
+
+            $template->list = $data;
             $template->class .= ' list';
         }
 
