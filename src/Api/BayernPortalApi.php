@@ -198,9 +198,7 @@ class BayernPortalApi
             $addition = $this->get('leistungsbeschreibungen/'.$data->regionaleErgaenzungen->regionaleErgaenzung[0]->id, $this->applyMunicipalityParameter());
 
             foreach ($addition as $property => $value) {
-                if (!isset($data->{$property})) {
-                    $data->{$property} = $value;
-                }
+                $data->{$property} = $value;
             }
         }
 
