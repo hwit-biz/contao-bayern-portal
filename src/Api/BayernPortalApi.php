@@ -140,9 +140,11 @@ class BayernPortalApi
         return $this->collectionFactory($data->behoerde, BehoerdeEntity::class);
     }
 
-    public function getBehoerde(int $id): BehoerdeEntity
+    public function getBehoerde(int $id, array $options = []): BehoerdeEntity
     {
-        $data = $this->get('behoerden/'.$id);
+        $options = array_merge_recursive(['query' => ['sicheresKontaktformular' => true]], $options);
+
+        $data = $this->get('behoerden/'.$id, $options);
 
         $behoerde = BehoerdeEntity::factory($data->behoerde);
 
@@ -190,12 +192,12 @@ class BayernPortalApi
 
     public function getLeistung(int $leistungId, array $options = []): LeistungEntity
     {
-        $options = $this->applyMunicipalityParameter(['query' => ['mitRegionalenErgaenzungen' => true]]);
+        $options = $this->applyMunicipalityParameter(array_merge_recursive(['query' => ['mitRegionalenErgaenzungen' => true, 'sicheresKontaktformular' => false]], $options));
 
         $data = $this->get('leistungsbeschreibungen/'.$leistungId, $options);
 
         if (!empty($data->regionaleErgaenzungen) && !empty($data->regionaleErgaenzungen->regionaleErgaenzung)) {
-            $addition = $this->get('leistungsbeschreibungen/'.$data->regionaleErgaenzungen->regionaleErgaenzung[0]->id, $this->applyMunicipalityParameter());
+            $addition = $this->get('leistungsbeschreibungen/'.$data->regionaleErgaenzungen->regionaleErgaenzung[0]->id, $options);
 
             foreach ($addition as $property => $value) {
                 $data->{$property} = $value;

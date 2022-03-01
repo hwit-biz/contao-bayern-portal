@@ -38,4 +38,5 @@ $GLOBALS['TL_LANG']['BayernPortal']['labels']['responsibleAdministration'] = 'Ve
 $GLOBALS['TL_LANG']['BayernPortal']['labels']['responsibleAdministrations'] = 'Zuständige Behördenstellen';
 $GLOBALS['TL_LANG']['BayernPortal']['labels']['legalBasis'] = 'Rechtsgrundlagen';
 $GLOBALS['TL_LANG']['BayernPortal']['labels']['onlineTransactions'] = 'Online Verfahren';
+$GLOBALS['TL_LANG']['BayernPortal']['labels']['secureForm'] = 'Sicheres Kontaktformular';
 $GLOBALS['TL_LANG']['BayernPortal']['msgs']['appointmentsOnly'] = 'Nur nach Vereinbarung.';

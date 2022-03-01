@@ -28,6 +28,11 @@
           <span class="label"><?= $this->trans('BayernPortal.labels.website') ?></span> <a href="<?= $this->website ?>" class="website-address"><?= $this->website ?></a>
         </li>
       <?php endif; ?>
+      <?php if ($this->linkSicheresKontaktformular): ?>
+        <li class="contactform">
+          <span class="label"><?= $this->trans('BayernPortal.labels.secureForm') ?></span> <a href="<?= $this->linkSicheresKontaktformular?>" target="_blank" rel="noopener noreferrer nofollow" class="contactform-address"><?= $this->linkSicheresKontaktformular?></a>
+        </li>
+      <?php endif; ?>
     </ul>
   <?php endif; ?>
 
