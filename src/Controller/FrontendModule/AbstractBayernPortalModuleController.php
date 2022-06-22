@@ -21,14 +21,21 @@ abstract class AbstractBayernPortalModuleController extends AbstractFrontendModu
      */
     protected function sortData(array $data, string $property = 'bezeichnung', string $type = 'alphabetically'): array
     {
-        usort($data, static function ($a, $b) use ($property, $type): int {
+        $transliterator = self::getTransliterator();
+
+        usort($data, static function ($a, $b) use ($property, $type, $transliterator): int {
             if ('numerical' === $type) {
                 return (int) $a->{$property} - (int) $b->{$property};
             }
 
-            return strcmp($a->{$property}, $b->{$property});
+            return strnatcasecmp($transliterator->transliterate($a->{$property}), $transliterator->transliterate($b->{$property}));
         });
 
         return $data;
+    }
+
+    protected static function getTransliterator(): \Transliterator
+    {
+        return \Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: Upper(); :: NFC;');
     }
 }

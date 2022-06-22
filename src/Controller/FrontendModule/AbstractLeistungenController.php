@@ -25,12 +25,14 @@ abstract class AbstractLeistungenController extends AbstractBayernPortalModuleCo
     {
         $list = [];
 
+        $transliterator = self::getTransliterator();
+
         foreach ($data as $entry) {
             if (empty($entry->bezeichnung)) {
                 continue;
             }
 
-            $c = strtoupper(mb_substr($entry->bezeichnung, 0, 1));
+            $c = $transliterator->transliterate(mb_substr($entry->bezeichnung, 0, 1));
 
             if (isset($list[$c])) {
                 continue;
@@ -39,7 +41,9 @@ abstract class AbstractLeistungenController extends AbstractBayernPortalModuleCo
             $list[$c] = ltrim($request->getPathInfo(), '/').'?filter='.$c;
         }
 
-        ksort($list);
+        uksort($list, static function ($a, $b): int {
+            return strnatcasecmp($a, $b);
+        });
 
         $allLabel = null !== $translator ? $translator->trans('all', [], 'ContaoBayernPortal') : 'all';
         $list[$allLabel] = ltrim($request->getPathInfo(), '/');
@@ -68,12 +72,14 @@ abstract class AbstractLeistungenController extends AbstractBayernPortalModuleCo
 
         $filtered = [];
 
+        $transliterator = self::getTransliterator();
+
         foreach ($data as $entry) {
             if (empty($entry->bezeichnung)) {
                 continue;
             }
 
-            $c = strtoupper(mb_substr($entry->bezeichnung, 0, 1));
+            $c = $transliterator->transliterate(mb_substr($entry->bezeichnung, 0, 1));
 
             if ($filter === $c) {
                 $filtered[] = $entry;
