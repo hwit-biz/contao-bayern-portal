@@ -1,4 +1,8 @@
 
 <li class="ansprechpartner ansprechpartner--list">
-  <a href="<?= $this->link ?>"><?= $this->anrede ?> <?= $this->vorname ?> <?= $this->nachname ?>, <?= $this->funktion ?></a>
+  <?php if ($link = $this->link()): ?>
+    <a href="<?= $link ?>"><?= $this->anrede ?> <?= $this->vorname ?> <?= $this->nachname ?>, <?= $this->funktion ?></a>
+  <?php else: ?>
+    <?= $this->anrede ?> <?= $this->vorname ?> <?= $this->nachname ?>, <?= $this->funktion ?>
+  <?php endif; ?>
 </li>

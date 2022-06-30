@@ -30,19 +30,17 @@ class EntityLinkCreator
         $this->context = $context;
     }
 
-    public function generateLink(AbstractEntity $entity): string
+    public function generateLink(AbstractEntity $entity): ?string
     {
-        $link = $this->{'generate'.ucfirst($entity->getType())}($entity);
-
-        if (null !== $link) {
-            return $link;
-        }
-
-        return $this->getCurrentPage()->getFrontendUrl('/'.$entity->getType().'/'.$entity->id);
+        return $this->{'generate'.ucfirst($entity->getType())}($entity);
     }
 
-    private function generateAnsprechpartner(AnsprechpartnerEntity $entity): string
+    private function generateAnsprechpartner(AnsprechpartnerEntity $entity): ?string
     {
+        if (null === $entity->ansprechpartnerId) {
+            return null;
+        }
+
         $page = $this->getCurrentPage();
         $params = '/'.$entity->getType().'/'.$entity->ansprechpartnerId;
 
@@ -54,15 +52,23 @@ class EntityLinkCreator
         return $page->getFrontendUrl($params);
     }
 
-    private function generateBehoerde(BehoerdeEntity $entity): string
+    private function generateBehoerde(BehoerdeEntity $entity): ?string
     {
+        if (null === $entity->id) {
+            return null;
+        }
+
         $page = $this->context->getBehoerdenPage() ?: $this->getCurrentPage();
 
         return $page->getFrontendUrl('/'.$entity->getType().'/'.$entity->id);
     }
 
-    private function generateGebaeude(GebaeudeEntity $entity): string
+    private function generateGebaeude(GebaeudeEntity $entity): ?string
     {
+        if (null === $entity->id) {
+            return null;
+        }
+
         if (null === $this->context->behoerdeId) {
             throw new \RuntimeException('Behoerde ID missing from context.');
         }
@@ -72,15 +78,23 @@ class EntityLinkCreator
         return $page->getFrontendUrl('/'.BehoerdeEntity::getType().'/'.$this->context->behoerdeId.'/'.$entity->getType().'/'.$entity->id);
     }
 
-    private function generateLebenslage(LebenslageEntity $entity): string
+    private function generateLebenslage(LebenslageEntity $entity): ?string
     {
+        if (null === $entity->id) {
+            return null;
+        }
+
         $page = $this->context->getLebenslagenPage() ?: $this->getCurrentPage();
 
         return $page->getFrontendUrl('/'.$entity->getType().'/'.$entity->id);
     }
 
-    private function generateLeistung(LeistungEntity $entity): string
+    private function generateLeistung(LeistungEntity $entity): ?string
     {
+        if (null === $entity->id) {
+            return null;
+        }
+
         $page = $this->getCurrentPage();
         $params = '/'.$entity->getType().'/'.$entity->id;
 
@@ -96,8 +110,12 @@ class EntityLinkCreator
         return $page->getFrontendUrl($params);
     }
 
-    private function generateDienststelle(DienststelleEntity $entity): string
+    private function generateDienststelle(DienststelleEntity $entity): ?string
     {
+        if (null === $entity->dienststellenschluessel) {
+            return null;
+        }
+
         return $this->getCurrentPage()->getFrontendUrl('/'.$entity->getType().'/'.$entity->dienststellenschluessel);
     }
 

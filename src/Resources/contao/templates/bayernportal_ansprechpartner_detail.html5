@@ -14,12 +14,12 @@
     <ul class="behoerde__infos" id="behoerde-infos">
       <?php if ($this->behoerdeBezeichnung): ?>
         <li class="behoerde">
-          <span class="label"><?= $this->trans('BayernPortal.labels.administration') ?></span> <a href="<?= $this->link($this->behoerde) ?>" class="behoerde-description"><?= $this->behoerdeBezeichnung ?></a>
+          <span class="label"><?= $this->trans('BayernPortal.labels.administration') ?></span> <?php if ($link = $this->link($this->behoerde)): ?><a href="<?= $link ?>" class="behoerde-description"><?= $this->behoerdeBezeichnung ?></a><?php else: ?><span class="behoerde-description"><?= $this->behoerdeBezeichnung ?></span><?php endif; ?>
         </li>
       <?php endif; ?>
       <?php if ($this->gebaeudeBezeichnung): ?>
         <li class="gebaeude">
-          <span class="label"><?= $this->trans('BayernPortal.labels.building') ?></span> <a href="<?= $this->link($this->gebaeude) ?>" class="gebaeude-description"><?= $this->gebaeudeBezeichnung ?></a>
+          <span class="label"><?= $this->trans('BayernPortal.labels.building') ?></span> <?php if ($link = $this->link($this->gebaeude)): ?><a href="<?= $link ?>" class="gebaeude-description"><?= $this->gebaeudeBezeichnung ?></a><?php else: ?><span class="gebaeude-description"><?= $this->gebaeudeBezeichnung ?></span><?php endif; ?>
         </li>
       <?php endif; ?>
       <?php if ($this->telefonAnlage): ?>

@@ -1,4 +1,8 @@
 
 <li class="dienststelle dienststelle--list">
-  <a href="<?= $this->link ?>"><?= $this->bezeichnung ?></a>
+  <?php if ($link = $this->link()): ?>
+    <a href="<?= $link ?>"><?= $this->bezeichnung ?></a>
+  <?php else: ?>
+    <?= $this->bezeichnung ?>
+  <?php endif; ?>
 </li>
