@@ -303,6 +303,7 @@ class BayernPortalApi
 
     public function getDienststelleLeistungen(string $dienststellenschluessel, array $options = []): array
     {
+        $options = array_merge_recursive(['query' => ['mitZustaendigkeiten' => true]], $options);
         $options = $this->applyMunicipalityParameter($options);
 
         $data = $this->get('dienststellen/'.$dienststellenschluessel.'/leistungen', $options);
