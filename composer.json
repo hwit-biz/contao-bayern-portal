@@ -2,7 +2,7 @@
     "name": "inspiredminds/contao-bayern-portal",
     "description": "Contao extension to show data from the BayernPortal in the front end.",
     "type": "contao-bundle",
-    "version": "0.8.0_b5",
+    "version": "0.8.0_b6",
     "homepage": "https://github.com/inspiredminds/contao-bayern-portal",
     "license": "LGPL-3.0-or-later",
     "authors": [
