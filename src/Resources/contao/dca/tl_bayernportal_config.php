@@ -10,9 +10,12 @@ declare(strict_types=1);
  * @license LGPL-3.0-or-later
  */
 
+use Contao\DC_Table;
+use Contao\DataContainer;
+
 $GLOBALS['TL_DCA']['tl_bayernportal_config'] = [
     'config' => [
-        'dataContainer' => 'Table',
+        'dataContainer' => DC_Table::class,
         'enableVersioning' => true,
         'markAsCopy' => 'name',
         'sql' => [
@@ -23,8 +26,8 @@ $GLOBALS['TL_DCA']['tl_bayernportal_config'] = [
     ],
     'list' => [
         'sorting' => [
-            'mode' => 1,
-            'flag' => 1,
+            'mode' => DataContainer::MODE_SORTED,
+            'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'panelLayout' => 'search,limit',
             'fields' => ['name'],
         ],
