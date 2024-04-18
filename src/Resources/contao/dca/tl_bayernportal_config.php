@@ -77,7 +77,7 @@ $GLOBALS['TL_DCA']['tl_bayernportal_config'] = [
         ],
         'password' => [
             'exclude' => true,
-            'inputType' => 'textStore',
+            'inputType' => 'password',
             'eval' => ['tl_class' => 'w50', 'maxlength' => 255, 'mandatory' => true, 'doNotShow' => true, 'decodeEntities' => true],
             'sql' => ['type' => 'string', 'length' => 255, 'default' => ''],
         ],
